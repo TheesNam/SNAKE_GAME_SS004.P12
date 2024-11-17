@@ -1,0 +1,11 @@
+//===========================================
+Ý TƯỞNG:
+-Mỗi lần random ra 1 trong 4 loại thức ăn : 
+    +Loại 1: Cộng 1 điểm.
+    +Loại 2: cộng 5 điểm.
+    +Loại 3: Tăng gấp đôi tốc độ di chuyển của rắn. 
+-Một vài portal cho phép dịch chuyển đến một portal khác. 
+-Bảng high_score lưu lại top 5 người chơi. 
+-Lựa chọn replay khi game over.
+-Thêm các vật chắn trong phần con rắn di chuyển 
+============================================//
