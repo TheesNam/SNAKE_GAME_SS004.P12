@@ -27,11 +27,11 @@ OFFSET_X = (screen_width - board_width) //2
 OFFSET_Y = (screen_height - board_height) //2
 
 pygame.mixer.music.load("gametheme.mp3")  
-pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.set_volume(0.2)
 pygame.mixer.music.play(-1)  
 
 food_sound = pygame.mixer.Sound("eating.wav")  
-food_sound.set_volume(0.2)
+food_sound.set_volume(0.3)
 
 class Food:
     def __init__(self, snake_body):
@@ -145,7 +145,12 @@ while True:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
-            if game.state == "STOPPED":
+            if event.key == pygame.K_SPACE:
+                if game.state == "RUNNING":
+                    game.state = "PAUSED"  
+                elif game.state == "PAUSED":
+                    game.state = "RUNNING"     
+            elif game.state == "STOPPED":
                 game.state = "RUNNING"
             
             else:
@@ -166,7 +171,14 @@ while True:
                       board_width + 10, 
                       board_height + 10), 
                      5)
-    game.draw()
+    if game.state != "PAUSE":
+        game.draw()
+    if game.state == "PAUSED":
+        pause_surface = title_font.render("PAUSE GAME", True, DARK_GREEN)
+        pause_X = (screen_width - pause_surface.get_width()) // 2
+        pause_Y = (screen_height - pause_surface.get_height()) // 2
+        screen.blit(pause_surface, (pause_X, pause_Y))
+
     title_surface_1 = title_font.render("SNAKE", True, DARK_GREEN)
     title_surface_2 = title_font.render("GAME", True, DARK_GREEN)
     score_title_surface = title_font.render("SCORE", True, DARK_GREEN)
