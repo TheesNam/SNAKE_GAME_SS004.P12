@@ -133,10 +133,13 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-            
         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
             if game.state == "STOPPED":
                 game.state = "RUNNING"
+            
             else:
                 if event.key == pygame.K_UP and game.snake.direction != Vector2(0, 1):
                     game.snake.direction = Vector2(0, -1)
@@ -152,13 +155,20 @@ while True:
     pygame.draw.rect(screen, DARK_GREEN, 
                      (OFFSET_X - 5, 
                       OFFSET_Y - 5, 
-                      cell_size * number_of_cells + 10, 
-                      cell_size * number_of_cells +10), 
+                      board_width + 10, 
+                      board_height + 10), 
                      5)
     game.draw()
     title_surface = title_font.render("SNAKE GAME", True, DARK_GREEN)
     score_surface = title_font.render(str(game.score), True, DARK_GREEN)
-    screen.blit(title_surface, (OFFSET - 5, 20))
-    screen.blit(score_surface, (OFFSET - 5, OFFSET + cell_size*number_of_cells +10))
+    
+    title_X = OFFSET_X 
+    title_Y = OFFSET_Y - 60
+    
+    score_X = OFFSET_X + board_width - score_surface.get_width()
+    score_Y = OFFSET_Y - 60
+    
+    screen.blit(title_surface, (OFFSET_X , title_Y))
+    screen.blit(score_surface, (score_X , score_Y))
     pygame.display.update()
     clock.tick(60)
