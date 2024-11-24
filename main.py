@@ -118,6 +118,7 @@ class Game:
         self.food = Food(self.snake.body)
         self.state = "RUNNING"
         self.score = 0
+        self.best_score = 0
     
     def draw(self):
         self.snake.draw()
@@ -145,6 +146,8 @@ class Game:
             self.game_over()
     
     def game_over(self):
+        if self.score > self.best_score:  
+            self.best_score = self.score
         self.snake.reset()
         self.food.position = self.food.generate_random_pos(self.snake.body)
         self.state = "STOPPED"
@@ -221,6 +224,9 @@ while True:
     title_surface_2 = title_font.render("GAME", True, DARK_GREEN)
     score_title_surface = title_font.render("SCORE", True, DARK_GREEN)
     score_surface = score_font.render(str(game.score), True, DARK_GREEN)
+    best_title_surface = score_font.render("BESTSCORE", True, DARK_GREEN)
+    best_score_suface = score_font.render (str(game.best_score), True, DARK_GREEN)
+
     
     title_X = OFFSET_X - 10 - title_surface_1.get_width()
     title_Y_1 = OFFSET_Y
@@ -231,10 +237,19 @@ while True:
     
     score_X = score_title_X - 12 + score_title_surface.get_width()/2 
     score_Y = OFFSET_Y*1.5 + score_title_surface.get_height()
+
+    best_title_X = score_title_X - 30 
+    best_title_Y = score_Y + score_surface.get_height() + 20
+
+    best_score_X = score_X
+    best_score_Y = best_title_Y + best_title_surface.get_height() + 10 
+
     
     screen.blit(title_surface_1, (title_X, title_Y_1))
     screen.blit(title_surface_2, (title_X, title_Y_2))
     screen.blit(score_title_surface, (score_title_X, score_title_Y))
     screen.blit(score_surface, (score_X , score_Y))
+    screen.blit(best_title_surface, (best_title_X, best_title_Y)) 
+    screen.blit(best_score_suface, (best_score_X, best_score_Y)) 
     pygame.display.update()
     clock.tick(60)
