@@ -26,6 +26,10 @@ board_height = cell_size * number_of_cells
 OFFSET_X = (screen_width - board_width) //2
 OFFSET_Y = (screen_height - board_height) //2
 
+pygame.mixer.music.load("gametheme.mp3")  
+pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.play(-1)  
+
 class Food:
     def __init__(self, snake_body):
         self.position = self.generate_random_pos(snake_body)
