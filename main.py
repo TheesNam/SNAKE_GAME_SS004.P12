@@ -21,12 +21,20 @@ screen_info = pygame.display.Info()
 screen_width = screen_info.current_w
 screen_height = screen_info.current_h
 
+board_width = cell_size* number_of_cells
+board_height = cell_size * number_of_cells
+OFFSET_X = (screen_width - board_width) //2
+OFFSET_Y = (screen_height - board_height) //2
+
 class Food:
     def __init__(self, snake_body):
         self.position = self.generate_random_pos(snake_body)
     
     def draw(self):
-        food_rect = pygame.Rect( OFFSET + self.position.x * cell_size, OFFSET + self.position.y * cell_size, cell_size, cell_size)
+        food_rect = pygame.Rect( OFFSET_X + self.position.x * cell_size, 
+                                OFFSET_Y + self.position.y * cell_size, 
+                                cell_size, 
+                                cell_size)
         pygame.draw.rect(screen, DARK_GREEN, food_rect)
     
     def generate_random_cell(self):
@@ -48,7 +56,10 @@ class Snake:
         
     def draw(self):
         for segment in self.body:
-            segment_rect = (OFFSET + segment.x * cell_size, OFFSET + segment.y * cell_size, cell_size, cell_size)
+            segment_rect = (OFFSET_X + segment.x * cell_size, 
+                            OFFSET_Y + segment.y * cell_size, 
+                            cell_size, 
+                            cell_size)
             pygame.draw.rect(screen, DARK_GREEN, segment_rect, 0, 7 )  
     def update(self):
         self.body.insert(0, self.body[0] + self.direction)
@@ -102,7 +113,9 @@ class Game:
         if self.snake.body[0] in headless_body:
             self.game_over()
     
-screen = pygame.display.set_mode ((screen_width, screen_height), pygame.FULLSCREEN)
+screen = pygame.display.set_mode ((screen_width, 
+                                   screen_height), 
+                                  pygame.FULLSCREEN)
 
 pygame.display.set_caption("SNAKE GAME")
 
@@ -137,7 +150,11 @@ while True:
             
     screen.fill(GREEN)        
     pygame.draw.rect(screen, DARK_GREEN, 
-                     (OFFSET - 5, OFFSET - 5, cell_size * number_of_cells + 10, cell_size * number_of_cells +10), 5)
+                     (OFFSET_X - 5, 
+                      OFFSET_Y - 5, 
+                      cell_size * number_of_cells + 10, 
+                      cell_size * number_of_cells +10), 
+                     5)
     game.draw()
     title_surface = title_font.render("SNAKE GAME", True, DARK_GREEN)
     score_surface = title_font.render(str(game.score), True, DARK_GREEN)
