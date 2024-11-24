@@ -27,8 +27,11 @@ OFFSET_X = (screen_width - board_width) //2
 OFFSET_Y = (screen_height - board_height) //2
 
 pygame.mixer.music.load("gametheme.mp3")  
-pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)  
+
+food_sound = pygame.mixer.Sound("eating.wav")  
+food_sound.set_volume(0.2)
 
 class Food:
     def __init__(self, snake_body):
@@ -99,6 +102,7 @@ class Game:
             self.food.position = self.food.generate_random_pos(self.snake.body)
             self.snake.add_segment = True
             self.score += 1
+            food_sound.play()
     
     def check_collision_with_edges(self):
         if self.snake.body[0].x == number_of_cells or self.snake.body[0].x == -1:
