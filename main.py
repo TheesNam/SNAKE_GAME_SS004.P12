@@ -6,8 +6,9 @@ from pygame.math import Vector2
 
 pygame.init()
 
-title_font = pygame.font.Font(None, 60)
-score_font = pygame.font.Font(None,40)
+title_font = pygame.font.Font("assets/font.ttf", 30)
+score_title_font = pygame.font.Font("assets/font.ttf",20)
+score_font = pygame.font.Font("assets/font.ttf", 25)
 
 GREEN = (173, 204, 96)
 DARK_GREEN = (43, 51, 24)
@@ -221,15 +222,15 @@ while True:
     score_title_surface = title_font.render("SCORE", True, DARK_GREEN)
     score_surface = score_font.render(str(game.score), True, DARK_GREEN)
     
-    title_X = OFFSET_X - title_surface_1.get_width()
+    title_X = OFFSET_X - 10 - title_surface_1.get_width()
     title_Y_1 = OFFSET_Y
     title_Y_2 = title_Y_1 - title_surface_1.get_height()
     
     score_title_X = OFFSET_X +board_width + score_title_surface.get_width()
     score_title_Y = OFFSET_Y
     
-    score_X = OFFSET_X + board_width + score_surface.get_width()
-    score_Y = OFFSET_Y + score_title_surface.get_height()
+    score_X = score_title_X - 12 + score_title_surface.get_width()/2 
+    score_Y = OFFSET_Y*1.5 + score_title_surface.get_height()
     
     screen.blit(title_surface_1, (title_X, title_Y_1))
     screen.blit(title_surface_2, (title_X, title_Y_2))
