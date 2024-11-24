@@ -159,16 +159,19 @@ while True:
                       board_height + 10), 
                      5)
     game.draw()
-    title_surface = title_font.render("SNAKE GAME", True, DARK_GREEN)
-    score_surface = title_font.render(str(game.score), True, DARK_GREEN)
+    title_surface_1 = title_font.render("SNAKE", True, DARK_GREEN)
+    title_surface_2 = title_font.render("GAME", True, DARK_GREEN)
+    score_surface = score_font.render(str(game.score), True, DARK_GREEN)
     
-    title_X = OFFSET_X 
-    title_Y = OFFSET_Y - 60
+    title_X = OFFSET_X - title_surface_1.get_width()
+    title_Y_1 = OFFSET_Y
+    title_Y_2 = title_Y_1 - title_surface_1.get_height()
     
-    score_X = OFFSET_X + board_width - score_surface.get_width()
-    score_Y = OFFSET_Y - 60
+    score_X = OFFSET_X + board_width + score_surface.get_width()
+    score_Y = OFFSET_Y 
     
-    screen.blit(title_surface, (OFFSET_X , title_Y))
+    screen.blit(title_surface_1, (title_X, title_Y_1))
+    screen.blit(title_surface_2, (title_X, title_Y_2))
     screen.blit(score_surface, (score_X , score_Y))
     pygame.display.update()
     clock.tick(60)
