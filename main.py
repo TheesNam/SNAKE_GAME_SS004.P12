@@ -121,6 +121,15 @@ class Game:
         self.best_score = 0
     
     def draw(self):
+        for row in range(number_of_cells):
+            for col in range(number_of_cells):
+                color = LIGHT_GREEN if (row + col) % 2 == 0 else GREEN
+                cell_rect = pygame.Rect(OFFSET_X + col * cell_size, 
+                                        OFFSET_Y + row * cell_size, 
+                                        cell_size, 
+                                        cell_size)
+                pygame.draw.rect(screen, color, cell_rect)
+        
         self.snake.draw()
         self.food.draw()
     
