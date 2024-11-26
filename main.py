@@ -340,7 +340,7 @@ class Menu:
         self.screen = screen
         self.bg = bg
         self.buttons = [
-            Button(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 250), 
+            Button(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 350), 
                    text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White"),
            # Button(image=pygame.image.load("assets/Options Rect.png"), pos=(640, 400), 
            #        text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White"),
