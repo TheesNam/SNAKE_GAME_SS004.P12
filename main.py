@@ -388,6 +388,7 @@ clock = pygame.time.Clock()
 game = Game()
 SNAKE_UPDATE = pygame.USEREVENT 
 pygame.time.set_timer(SNAKE_UPDATE, 200)
+game.state = "STOPPED" 
 while True:
     for event in pygame.event.get():
         if event.type == SNAKE_UPDATE:
