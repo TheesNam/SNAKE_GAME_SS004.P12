@@ -45,9 +45,16 @@ def get_font(size): # Returns Press-Start-2P in the desired size
 
 class Food:
     def __init__(self, snake_body):
+        self.types =[
+            {"image": "assets/apple.png", "score": 1},
+            {"image": "assets/banana.png", "score": 2},
+            {"image": "assets/cherry.png", "score": 3},
+        ]
+        self.current_type = random.choice(self.types)
         self.position = self.generate_random_pos(snake_body)
-        self.image = pygame.image.load("assets/apple.png").convert_alpha()
+        self.image = pygame.image.load(self.current_type["image"]).convert_alpha()
         self.image = pygame.transform.scale(self.image, (cell_size, cell_size))
+        self.score_value = self.current_type["score"]
 
        
     
@@ -68,7 +75,15 @@ class Food:
         position = self.generate_random_cell()
         while position in snake_body:
             position = self.generate_random_cell()
-        return position   
+        return position
+
+    def regenerate(self, snake_body):
+        self.current_type = random.choice(self.types)
+        self.image = pygame.image.load(self.current_type["image"]).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (cell_size, cell_size))
+        self.score_value = self.current_type["score"]
+        self.position = self.generate_random_pos(snake_body)
+
 class Snake:
     def __init__(self):
         self.body = [Vector2(3, 1), Vector2(2,1), Vector2(1,1)]
@@ -270,9 +285,9 @@ class Game:
     
     def check_collision_with_the_food(self):
         if self.snake.body[0] == self.food.position:
-            self.food.position = self.food.generate_random_pos(self.snake.body)
+            self.score += self.food.score_value  
+            self.food.regenerate(self.snake.body)
             self.snake.add_segment = True
-            self.score += 1
             food_sound.play()
     
     def check_collision_with_edges(self):
