@@ -398,8 +398,17 @@ while True:
             sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                pygame.quit()
-                sys.exit()
+                game.state = "PAUSE_MENU"  
+
+            if game.state == "PAUSE_MENU":
+                if event.key == pygame.K_1:  
+                    game.state = "RUNNING"
+                elif event.key == pygame.K_2:  
+                    game = Game()
+                    game.state = "RUNNING"
+                elif event.key == pygame.K_3: 
+                    pygame.quit()
+                    sys.exit()
             if event.key == pygame.K_SPACE:
                 if game.state == "RUNNING":
                     game.state = "PAUSED"  
@@ -443,6 +452,19 @@ while True:
     score_surface = score_font.render(str(game.score), True, DARK_GREEN)
     best_title_surface = score_font.render("BESTSCORE", True, DARK_GREEN)
     best_score_suface = score_font.render (str(game.best_score), True, DARK_GREEN)
+    if game.state == "PAUSE_MENU":
+        
+        title_surface = title_font.render("PAUSE MENU", True, DARK_GREEN)
+        title_rect = title_surface.get_rect(center=(screen_width // 2, screen_height // 4))
+        screen.blit(title_surface, title_rect)
+
+        resume_text = score_font.render("1: Resume", True, DARK_GREEN)
+        reset_text = score_font.render("2: Reset", True, DARK_GREEN)
+        quit_text = score_font.render("3: Quit", True, DARK_GREEN)
+
+        screen.blit(resume_text, (screen_width // 2 - 100, screen_height // 2 - 50))
+        screen.blit(reset_text, (screen_width // 2 - 100, screen_height // 2))
+        screen.blit(quit_text, (screen_width // 2 - 100, screen_height // 2 + 50))    
 
     
     title_X = OFFSET_X - 10 - title_surface_1.get_width()
