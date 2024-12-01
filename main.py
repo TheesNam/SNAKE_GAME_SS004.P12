@@ -15,13 +15,10 @@ score_font = pygame.font.Font("assets/font.ttf", 25)
 GREEN = (173, 204, 96)
 DARK_GREEN = (43, 51, 24)
 LIGHT_GREEN = (163, 194, 80)
-snake_head=pygame.image.load("assets/meome.png")
-snake_bodys= pygame.image.load("assets/meocon1.png")
 
 cell_size = 30
 number_of_cells = 25
 BG_Game = pygame.image.load("assets/greenhill.jpg")
-Snake_theme= [snake_head,snake_bodys,BG_Game]
 OFFSET = 75
 
 screen_info = pygame.display.Info()
@@ -134,126 +131,7 @@ class Snake:
             self.head_image = self.head_images["LEFT"]
         elif self.direction == Vector2(1, 0):
             self.head_image = self.head_images["RIGHT"]
-def mode():
-    global toc_do_ran
-    while True:
-        OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
-        screen.fill("white")
-        
-        OPTIONS_EASY = Button(image=None, pos=(640, 150), 
-                            text_input="EASY", font=get_font(75), base_color="Black", hovering_color="Green")
-        
-        OPTIONS_NORMAL = Button(image=None, pos=(640, 300), 
-                            text_input="NORMAL", font=get_font(75), base_color="Black", hovering_color="Green")
-        
-        OPTIONS_HARD = Button(image=None, pos=(640, 450), 
-                            text_input="HARD", font=get_font(75), base_color="Black", hovering_color="Green")
-        
-        OPTIONS_EASY.changeColor(OPTIONS_MOUSE_POS)
-        OPTIONS_NORMAL.changeColor(OPTIONS_MOUSE_POS)
-        OPTIONS_HARD.changeColor(OPTIONS_MOUSE_POS)
-        OPTIONS_EASY.update(screen)
-        OPTIONS_NORMAL.update(screen)
-        OPTIONS_HARD.update(screen)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if OPTIONS_EASY.checkForInput(OPTIONS_MOUSE_POS):
-                    toc_do_ran = 10
-                    option = Options(screen)
-                    option.options()
-                if OPTIONS_NORMAL.checkForInput(OPTIONS_MOUSE_POS):
-                    toc_do_ran=20
-                    option = Options(screen)
-                    option.options()
-                if OPTIONS_HARD.checkForInput(OPTIONS_MOUSE_POS):
-                    toc_do_ran=30
-                    option = Options(screen)
-                    option.options()
-        
-        pygame.display.update()
-def theme():
-    while True:
-        OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
-        screen.fill("white")
-        
-        OPTIONS_MEOW = Button(image=None, pos=(640, 150), 
-                            text_input="CAT", font=get_font(75), base_color="Black", hovering_color="Green")
-        
-        OPTIONS_FISH = Button(image=None, pos=(640, 300), 
-                            text_input="FISH", font=get_font(75), base_color="Black", hovering_color="Green")
-        
-        OPTIONS_UFO = Button(image=None, pos=(640, 450), 
-                            text_input="UFO", font=get_font(75), base_color="Black", hovering_color="Green")
-        
-        OPTIONS_MEOW.changeColor(OPTIONS_MOUSE_POS)
-        OPTIONS_FISH.changeColor(OPTIONS_MOUSE_POS)
-        OPTIONS_UFO.changeColor(OPTIONS_MOUSE_POS)
-        OPTIONS_MEOW.update(screen)
-        OPTIONS_FISH.update(screen)
-        OPTIONS_UFO.update(screen)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if OPTIONS_MEOW.checkForInput(OPTIONS_MOUSE_POS):
-                    Snake_theme[0]=pygame.image.load("assets/meome.png")
-                    Snake_theme[0]=pygame.transform.scale(Snake_theme[0],(40,40))
-                    
-                    Snake_theme[1][0]=pygame.image.load("assets/meocon1.png")
-                    Snake_theme[1][0]=pygame.transform.scale(Snake_theme[1][0],(40,40))
-                    
-                    Snake_theme[1][1]=pygame.image.load("assets/meocon2.png")
-                    Snake_theme[1][1]=pygame.transform.scale(Snake_theme[1][1],(40,40))
-                    
-                    Snake_theme[1][2]=pygame.image.load("assets/meocon3.png")
-                    Snake_theme[1][2]=pygame.transform.scale(Snake_theme[1][2],(40,40))
-                    
-                    Snake_theme[2]=pygame.image.load("assets/greenhill.jpg")
-                    
-                    option = Options(screen)
-                    option.options()
-                    
-                if OPTIONS_FISH.checkForInput(OPTIONS_MOUSE_POS):
-                    Snake_theme[0]=pygame.image.load("assets/clownfish.png")
-                    Snake_theme[0]=pygame.transform.scale(Snake_theme[0],(40,40))
-                    
-                    Snake_theme[1][0]=pygame.image.load("assets/shark.png")
-                    Snake_theme[1][0]=pygame.transform.scale(Snake_theme[1][0],(40,40))
-                    
-                    Snake_theme[1][1]=pygame.image.load("assets/turtle.png")
-                    Snake_theme[1][1]=pygame.transform.scale(Snake_theme[1][1],(40,40))
-                    
-                    Snake_theme[1][2]=pygame.image.load("assets/bluefish.png")
-                    Snake_theme[1][2]=pygame.transform.scale(Snake_theme[1][2],(40,40))
-                    
-                    Snake_theme[2]=pygame.image.load("assets/underwater.png")
-                    option = Options(screen)
-                    option.options()
-
-                    
-                if OPTIONS_UFO.checkForInput(OPTIONS_MOUSE_POS):
-                    Snake_theme[0]=pygame.image.load("assets/theUFO.png")
-                    Snake_theme[0]=pygame.transform.scale(Snake_theme[0],(40,40))
-                    
-                    Snake_theme[1][0]=pygame.image.load("assets/cow.png")
-                    Snake_theme[1][0]=pygame.transform.scale(Snake_theme[1][0],(40,40))
-                    
-                    Snake_theme[1][1]=pygame.image.load("assets/person.png")
-                    Snake_theme[1][1]=pygame.transform.scale(Snake_theme[1][1],(40,40))
-                    
-                    Snake_theme[1][2]=pygame.image.load("assets/plant.png")
-                    Snake_theme[1][2]=pygame.transform.scale(Snake_theme[1][2],(40,40))
-                    
-                    Snake_theme[2]=pygame.image.load("assets/demdaysao.jpg")
-                    option = Options(screen)
-                    option.options()
-        
-        pygame.display.update()
 class Game:
     def __init__(self):
         self.snake = Snake()
@@ -345,10 +223,6 @@ class Options:
                     if self.back_button.checkForInput(options_mouse_pos):
                         menu = Menu(screen, BG)
                         menu.main_menu()
-                    if self.mode_button.checkForInput(options_mouse_pos):
-                        mode()
-                    if self.theme_button.checkForInput(options_mouse_pos):
-                        theme()
             pygame.display.update()
 class Menu:
     def __init__(self, screen, bg):
@@ -357,10 +231,6 @@ class Menu:
         self.buttons = [
             Button(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 350), 
                    text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White"),
-           # Button(image=pygame.image.load("assets/Options Rect.png"), pos=(640, 400), 
-           #        text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White"),
-           # Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(640, 550), 
-           #       text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
         ]
     def main_menu(self):
         while True:
@@ -413,9 +283,8 @@ while True:
             sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                game.state = "PAUSE_MENU"  
-
-            if game.state == "PAUSE_MENU":
+                game.state = "PAUSE"  
+            if game.state == "PAUSE":
                 if event.key == pygame.K_1:  
                     game.state = "RUNNING"
                 elif event.key == pygame.K_2:  
@@ -423,12 +292,7 @@ while True:
                     game.state = "RUNNING"
                 elif event.key == pygame.K_3: 
                     pygame.quit()
-                    sys.exit()
-            if event.key == pygame.K_SPACE:
-                if game.state == "RUNNING":
-                    game.state = "PAUSED"  
-                elif game.state == "PAUSED":
-                    game.state = "RUNNING"     
+                    sys.exit()     
             elif game.state == "STOPPED":
                 game.state = "RUNNING"
             
@@ -456,18 +320,8 @@ while True:
                      5)
     if game.state != "PAUSE":
         game.draw()
-    if game.state == "PAUSED":
-        pause_surface = title_font.render("PAUSE GAME", True, DARK_GREEN)
-        pause_X = (screen_width - pause_surface.get_width()) // 2
-        pause_Y = (screen_height - pause_surface.get_height()) // 2
-        screen.blit(pause_surface, (pause_X, pause_Y))
-    title_surface_1 = title_font.render("SNAKE", True, DARK_GREEN)
-    title_surface_2 = title_font.render("GAME", True, DARK_GREEN)
-    score_title_surface = title_font.render("SCORE", True, DARK_GREEN)
-    score_surface = score_font.render(str(game.score), True, DARK_GREEN)
-    best_title_surface = score_font.render("BESTSCORE", True, DARK_GREEN)
-    best_score_suface = score_font.render (str(game.best_score), True, DARK_GREEN)
-    if game.state == "PAUSE_MENU":
+        
+    if game.state == "PAUSE":
         
         title_surface = title_font.render("PAUSE MENU", True, DARK_GREEN)
         title_rect = title_surface.get_rect(center=(screen_width // 2, screen_height // 4))
@@ -479,32 +333,43 @@ while True:
 
         screen.blit(resume_text, (screen_width // 2 - 100, screen_height // 2 - 50))
         screen.blit(reset_text, (screen_width // 2 - 100, screen_height // 2))
-        screen.blit(quit_text, (screen_width // 2 - 100, screen_height // 2 + 50))    
-
+        screen.blit(quit_text, (screen_width // 2 - 100, screen_height // 2 + 50))  
+    
+    title_surface_1 = title_font.render("SNAKE", True, DARK_GREEN)
+    title_surface_2 = title_font.render("GAME", True, DARK_GREEN)
+    score_title_surface = title_font.render("SCORE: ", True, DARK_GREEN)
+    score_surface = score_font.render(str(game.score), True, DARK_GREEN)
+    best_title_surface_1 = title_font.render("BEST ", True, DARK_GREEN)
+    best_title_surface_2 = title_font.render("SCORE:", True, DARK_GREEN)
+    best_score_surface = score_font.render (str(game.best_score), True, DARK_GREEN)
     
     title_X = OFFSET_X - 10 - title_surface_1.get_width()
-    title_Y_1 = OFFSET_Y
-    title_Y_2 = title_Y_1 - title_surface_1.get_height()
+    title_Y_1 = OFFSET_Y + title_surface_1.get_height()
+    title_Y_2 = title_Y_1 + title_surface_1.get_height()
     
-    score_title_X = OFFSET_X +board_width + score_title_surface.get_width()
-    score_title_Y = OFFSET_Y
+    score_title_X = OFFSET_X + board_width + 10
+    score_title_Y = OFFSET_Y + score_title_surface.get_height()
     
-    score_X = score_title_X - 12 + score_title_surface.get_width()/2 
-    score_Y = OFFSET_Y*1.5 + score_title_surface.get_height()
+    
+    score_X = score_title_X + score_title_surface.get_width()
+    score_Y = score_title_Y
 
-    best_title_X = score_title_X - 30 
-    best_title_Y = score_Y + score_surface.get_height() + 20
-
-    best_score_X = score_X
-    best_score_Y = best_title_Y + best_title_surface.get_height() + 10 
+    best_title_X_1 = score_title_X
+    best_title_Y_1 = score_Y + best_title_surface_1.get_height()*2 
+    best_title_X_2 = score_title_X
+    best_title_Y_2 = best_title_Y_1 + best_title_surface_2.get_height()+10 
+    
+    best_score_X = score_title_X
+    best_score_Y = best_title_Y_2 + best_score_surface.get_height()+10
 
     
     screen.blit(title_surface_1, (title_X, title_Y_1))
     screen.blit(title_surface_2, (title_X, title_Y_2))
     screen.blit(score_title_surface, (score_title_X, score_title_Y))
     screen.blit(score_surface, (score_X , score_Y))
-    screen.blit(best_title_surface, (best_title_X, best_title_Y)) 
-    screen.blit(best_score_suface, (best_score_X, best_score_Y))
+    screen.blit(best_title_surface_1, (best_title_X_1, best_title_Y_1))
+    screen.blit(best_title_surface_2, (best_title_X_2, best_title_Y_2)) 
+    screen.blit(best_score_surface, (best_score_X, best_score_Y))
 
     pygame.display.update()
     clock.tick(60)
